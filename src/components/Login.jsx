@@ -6,7 +6,7 @@ const LoginSystem = ({ onLoginSuccess }) => {
 
   const validCredentials = {
     username: import.meta.env.VITE_USERNAME,
-    password: import.meta.env.VITE__PWD
+    password: import.meta.env.VITE_PWD
   };
 
   const [username, setUsername] = useState('');
