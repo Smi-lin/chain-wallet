@@ -3,26 +3,25 @@ import { ArrowDownLeft, ArrowUpRight, Clock, DollarSign, LogOut, Wallet } from "
 import "./Dashboard.css"
 
 export default function Dashboard({onLogout}) {
-  const [balance] = useState(38000)
+  const [balance] = useState(5000)
   const [activeTab, setActiveTab] = useState("all")
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
 
   const transactions = [
-    { id: 1, type: "in", amount: 15000, from: "0x8a3...45e2", date: "Jun 15, 2:30 PM", status: "Completed" },
-    { id: 2, type: "out", amount: 2500, to: "0x3f5...87c1", date: "Jun 14, 11:45 AM", status: "Completed" },
-    { id: 3, type: "in", amount: 8000, from: "0x4e6...78b3", date: "Jun 13, 9:20 AM", status: "Completed" },
-    { id: 4, type: "out", amount: 1200, to: "0x7c8...12a5", date: "Jun 12, 4:15 PM", status: "Completed" },
-    { id: 5, type: "in", amount: 12000, from: "0x9d2...34f7", date: "Jun 11, 8:45 AM", status: "Completed" },
-    { id: 6, type: "out", amount: 800, to: "0x2b4...67e9", date: "Jun 10, 1:20 PM", status: "Completed" },
-    { id: 7, type: "in", amount: 5500, from: "0x5c8...91a3", date: "Jun 9, 10:30 AM", status: "Completed" },
-    { id: 8, type: "out", amount: 1500, to: "0x6f3...28d4", date: "Jun 8, 3:45 PM", status: "Completed" },
-    { id: 9, type: "in", amount: 3200, from: "0x1e7...56b2", date: "Jun 7, 7:15 AM", status: "Completed" },
-    { id: 10, type: "out", amount: 900, to: "0x4a9...83c6", date: "Jun 6, 5:30 PM", status: "Completed" },
-    { id: 11, type: "in", amount: 1800, from: "0x8b5...47d1", date: "Jun 5, 12:45 PM", status: "Completed" },
-    { id: 12, type: "out", amount: 600, to: "0x3d8...92e5", date: "Jun 4, 9:10 AM", status: "Completed" },
-    { id: 13, type: "out", amount: 200, to: "0x5e4...73b9", date: "Jun 2, 2:50 PM", status: "Completed" }
+    { id: 1, type: "in", amount: 3000, from: "0x8a3...45e2", date: "Mar 15, 2:30 PM", status: "Completed" },
+    { id: 2, type: "out", amount: 500, to: "0x3f5...87c1", date: "Mar 14, 11:45 AM", status: "Completed" },
+    { id: 3, type: "in", amount: 1200, from: "0x4e6...78b3", date: "Mar 13, 9:20 AM", status: "Completed" },
+    { id: 4, type: "out", amount: 300, to: "0x7c8...12a5", date: "Mar 12, 4:15 PM", status: "Completed" },
+    { id: 5, type: "in", amount: 800, from: "0x9d2...34f7", date: "Feb 28, 8:45 AM", status: "Completed" },
+    { id: 6, type: "out", amount: 200, to: "0x2b4...67e9", date: "Feb 25, 1:20 PM", status: "Completed" },
+    { id: 7, type: "in", amount: 600, from: "0x5c8...91a3", date: "Feb 22, 10:30 AM", status: "Completed" },
+    { id: 8, type: "out", amount: 150, to: "0x6f3...28d4", date: "Feb 18, 3:45 PM", status: "Completed" },
+    { id: 9, type: "in", amount: 400, from: "0x1e7...56b2", date: "Feb 15, 7:15 AM", status: "Completed" },
+    { id: 10, type: "out", amount: 100, to: "0x4a9...83c6", date: "Feb 12, 5:30 PM", status: "Completed" },
+    { id: 11, type: "in", amount: 250, from: "0x8b5...47d1", date: "Jan 30, 12:45 PM", status: "Completed" },
+    { id: 12, type: "out", amount: 75, to: "0x3d8...92e5", date: "Jan 25, 9:10 AM", status: "Completed" },
+    { id: 13, type: "in", amount: 175, from: "0x5e4...73b9", date: "Jan 20, 2:50 PM", status: "Completed" }
   ]
-
 
   const filteredTransactions =
     activeTab === "all"
