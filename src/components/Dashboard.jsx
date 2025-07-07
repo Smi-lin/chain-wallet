@@ -8,6 +8,7 @@ export default function Dashboard({onLogout}) {
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
 
   const transactions = [
+    { id: 15, type: "in", amount: 4000, from: "0x7b2...89c3", date: "Jul 6, 2:00 PM", status: "Pending" },
     { id: 1, type: "in", amount: 1500, from: "0x8f4...45e4", date: "Jul 3, 10:03 PM", status: "Completed" },
     { id: 2, type: "in", amount: 3000, from: "0x8a3...45e2", date: "Mar 15, 2:30 PM", status: "Completed" },
     { id: 3, type: "out", amount: 500, to: "0x3f5...87c1", date: "Mar 14, 11:45 AM", status: "Completed" },
@@ -22,12 +23,13 @@ export default function Dashboard({onLogout}) {
     { id: 12, type: "in", amount: 250, from: "0x8b5...47d1", date: "Jan 30, 12:45 PM", status: "Completed" },
     { id: 13, type: "out", amount: 75, to: "0x3d8...92e5", date: "Jan 25, 9:10 AM", status: "Completed" },
     { id: 14, type: "in", amount: 175, from: "0x5e4...73b9", date: "Jan 20, 2:50 PM", status: "Completed" }
-    
   ]
 
   const filteredTransactions =
     activeTab === "all"
       ? transactions
+      : activeTab === "pending"
+      ? transactions.filter((tx) => tx.status === "Pending")
       : transactions.filter(
           (tx) => (activeTab === "sent" && tx.type === "out") || (activeTab === "received" && tx.type === "in"),
         )
@@ -101,6 +103,7 @@ export default function Dashboard({onLogout}) {
                 >
                   All
                 </button>
+               
                 <button
                   className={`tab-trigger ${activeTab === "sent" ? "active" : ""}`}
                   onClick={() => setActiveTab("sent")}
@@ -113,12 +116,18 @@ export default function Dashboard({onLogout}) {
                 >
                   Received
                 </button>
+                <button
+                  className={`tab-trigger ${activeTab === "pending" ? "active" : ""}`}
+                  onClick={() => setActiveTab("pending")}
+                >
+                  Pending
+                </button>
               </div>
               <div className="transaction-list">
                 {filteredTransactions.map((tx) => (
                   <div
                     key={tx.id}
-                    className={`transaction-item ${tx.type === "in" ? "transaction-in" : "transaction-out"}`}
+                    className={`transaction-item ${tx.type === "in" ? "transaction-in" : "transaction-out"} ${tx.status === "Pending" ? "transaction-pending" : ""}`}
                   >
                     <div className="transaction-icon">
                       {tx.type === "in" ? <ArrowDownLeft className="h-5 w-5" /> : <ArrowUpRight className="h-5 w-5" />}
@@ -130,12 +139,15 @@ export default function Dashboard({onLogout}) {
                       </div>
                     </div>
                     <div className="transaction-meta">
-                      <div className={`transaction-amount ${tx.type === "in" ? "amount-in" : "amount-out"}`}>
+                      <div className={`transaction-amount ${tx.type === "in" ? "amount-in" : "amount-out"} ${tx.status === "Pending" ? "amount-pending" : ""}`}>
                         {tx.type === "in" ? "+" : "-"}${tx.amount.toLocaleString()}
                       </div>
                       <div className="transaction-date">
                         <Clock className="h-3 w-3 mr-1" />
                         {tx.date}
+                      </div>
+                      <div className={`transaction-status ${tx.status === "Pending" ? "status-pending" : "status-completed"}`}>
+                        {tx.status}
                       </div>
                     </div>
                   </div>
@@ -144,10 +156,6 @@ export default function Dashboard({onLogout}) {
             </div>
           </div>
         </div>
-
-
-
-
       </div>
 
       {toast.show && (
