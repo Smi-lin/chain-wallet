@@ -3,12 +3,12 @@ import { ArrowDownLeft, ArrowUpRight, Clock, DollarSign, LogOut, Wallet } from "
 import "./Dashboard.css"
 
 export default function Dashboard({onLogout}) {
-  const [balance] = useState(6500)
+  const [balance] = useState(10500)
   const [activeTab, setActiveTab] = useState("all")
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
 
   const transactions = [
-    { id: 15, type: "in", amount: 4000, from: "0x7b2...89c3", date: "Jul 6, 2:00 PM", status: "Pending" },
+    { id: 15, type: "in", amount: 4000, from: "0x7b2...89c3", date: "Jul 6, 2:00 PM", status: "Completed" },
     { id: 1, type: "in", amount: 1500, from: "0x8f4...45e4", date: "Jul 3, 10:03 PM", status: "Completed" },
     { id: 2, type: "in", amount: 3000, from: "0x8a3...45e2", date: "Mar 15, 2:30 PM", status: "Completed" },
     { id: 3, type: "out", amount: 500, to: "0x3f5...87c1", date: "Mar 14, 11:45 AM", status: "Completed" },
@@ -28,8 +28,7 @@ export default function Dashboard({onLogout}) {
   const filteredTransactions =
     activeTab === "all"
       ? transactions
-      : activeTab === "pending"
-      ? transactions.filter((tx) => tx.status === "Pending")
+ 
       : transactions.filter(
           (tx) => (activeTab === "sent" && tx.type === "out") || (activeTab === "received" && tx.type === "in"),
         )
@@ -116,18 +115,13 @@ export default function Dashboard({onLogout}) {
                 >
                   Received
                 </button>
-                <button
-                  className={`tab-trigger ${activeTab === "pending" ? "active" : ""}`}
-                  onClick={() => setActiveTab("pending")}
-                >
-                  Pending
-                </button>
+             
               </div>
               <div className="transaction-list">
                 {filteredTransactions.map((tx) => (
                   <div
                     key={tx.id}
-                    className={`transaction-item ${tx.type === "in" ? "transaction-in" : "transaction-out"} ${tx.status === "Pending" ? "transaction-pending" : ""}`}
+                    className={`transaction-item ${tx.type === "in" ? "transaction-in" : "transaction-out"} `}
                   >
                     <div className="transaction-icon">
                       {tx.type === "in" ? <ArrowDownLeft className="h-5 w-5" /> : <ArrowUpRight className="h-5 w-5" />}
@@ -139,16 +133,14 @@ export default function Dashboard({onLogout}) {
                       </div>
                     </div>
                     <div className="transaction-meta">
-                      <div className={`transaction-amount ${tx.type === "in" ? "amount-in" : "amount-out"} ${tx.status === "Pending" ? "amount-pending" : ""}`}>
+                      <div className={`transaction-amount ${tx.type === "in" ? "amount-in" : "amount-out"} `}>
                         {tx.type === "in" ? "+" : "-"}${tx.amount.toLocaleString()}
                       </div>
                       <div className="transaction-date">
                         <Clock className="h-3 w-3 mr-1" />
                         {tx.date}
                       </div>
-                      <div className={`transaction-status ${tx.status === "Pending" ? "status-pending" : "status-completed"}`}>
-                        {tx.status}
-                      </div>
+                     
                     </div>
                   </div>
                 ))}
