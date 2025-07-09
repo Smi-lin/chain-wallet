@@ -3,11 +3,12 @@ import { ArrowDownLeft, ArrowUpRight, Clock, DollarSign, LogOut, Wallet } from "
 import "./Dashboard.css"
 
 export default function Dashboard({onLogout}) {
-  const [balance] = useState(10500)
+  const [balance] = useState(8500)
   const [activeTab, setActiveTab] = useState("all")
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
 
   const transactions = [
+    { id: 16, type: "out", amount: 2000, to: "0x6f3...64f8", date: "Jul 9, 1:00 PM", status: "Completed" },
     { id: 15, type: "in", amount: 4000, from: "0x7b2...89c3", date: "Jul 6, 2:00 PM", status: "Completed" },
     { id: 1, type: "in", amount: 1500, from: "0x8f4...45e4", date: "Jul 3, 10:03 PM", status: "Completed" },
     { id: 2, type: "in", amount: 3000, from: "0x8a3...45e2", date: "Mar 15, 2:30 PM", status: "Completed" },
