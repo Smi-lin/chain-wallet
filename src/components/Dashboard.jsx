@@ -74,7 +74,7 @@ export default function Dashboard({onLogout}) {
           <div className="card-content">
             <div className="wallet-address">
               <Wallet className="mr-2 h-4 w-4" />
-              <span>bc1qqj4cnknl6t7m8nxmxa9fqjx4th266t42gr72dm</span>
+              <span>0x4B0897b0513fdC7C541B6d9D7E929C4e5364D2dB</span>
             </div>
           </div>
           <div className="card-footer action-buttons">
